@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Ph.D. Candidate, Graduate Researcher at [Toronto Robotics and Artificial Intelligence Laboratory](https://www.trailab.utias.utoronto.ca/).
+subtitle: Ph.D. Candidate, Graduate Researcher at Toronto Robotics and Artificial Intelligence Laboratory.
 
 profile:
   align: right
