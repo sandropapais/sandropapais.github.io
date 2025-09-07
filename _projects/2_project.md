@@ -1,81 +1,55 @@
 ---
 layout: page
-title: project 2
-description: a project with a background image and giscus comments
-img: assets/img/3.jpg
+title: Camera-LiDAR 3D Object Tracking
+description: Sensor fusion approach for robust 3D object tracking combining camera and LiDAR data
+img: assets/img/camera_lidar_fusion.jpg
 importance: 2
-category: work
-giscus_comments: true
+category: research
+github: https://github.com/sandropapais/Camera_Lidar_3D_Object_Tracking
+related_publications: false
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+## Camera-LiDAR 3D Object Tracking
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+This project implements a comprehensive 3D object tracking system that leverages both camera images and LiDAR point clouds for enhanced robustness and accuracy in autonomous vehicle applications.
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+### Overview
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
+The fusion of camera and LiDAR sensors provides complementary information:
+- **Camera**: Rich semantic information, texture, and appearance details
+- **LiDAR**: Accurate 3D spatial information and distance measurements
 
-You can also put regular text between your rows of images.
-Say you wanted to write a little bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
+### Key Components
+
+1. **Sensor Calibration**: Precise calibration between camera and LiDAR coordinate systems
+2. **Object Detection**: Deep learning-based detection in both camera and LiDAR domains
+3. **Data Association**: Intelligent matching of detections across sensor modalities
+4. **Tracking Algorithm**: Kalman filter-based tracking with multi-modal state estimation
+
+### Technical Implementation
+
+The system processes synchronized camera and LiDAR data streams:
+
+```cpp
+// Pseudo-code for sensor fusion pipeline
+void processSensorData(CameraFrame& camera, LiDARPointCloud& lidar) {
+    auto camera_detections = detectObjects(camera);
+    auto lidar_detections = detectObjects(lidar);
+    
+    auto fused_detections = fuseDetections(camera_detections, lidar_detections);
+    updateTracks(fused_detections);
+}
+```
+
+### Results
+
+The sensor fusion approach demonstrates improved tracking accuracy and robustness compared to single-sensor systems, particularly in challenging weather conditions and complex urban environments.
 
 <div class="row justify-content-sm-center">
     <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/img/fusion_pipeline.jpg" title="Sensor fusion pipeline" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
+    Camera-LiDAR fusion pipeline showing detection and tracking results.
 </div>
-
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
-
-{% raw %}
-
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-</div>
-```
-
-{% endraw %}
