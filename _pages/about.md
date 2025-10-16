@@ -14,7 +14,7 @@ news: false # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
-Hello! I’m Sandro Papais, a Ph.D. Candidate at the [University of Toronto Robotics and Artificial Intelligence Laboratory (UTIAS)](https://www.trailab.utias.utoronto.ca/), supervised by [Prof. Steven Waslander](https://www.trailab.utias.utoronto.ca/steven-waslander/). I’m also an Affiliate Researcher at the [Vector Institute](https://vectorinstitute.ai/) and a Machine Learning Perception Researcher at [Zoox](https://zoox.com/), where I work on advancing perception systems for autonomous driving.  
+Hello! I’m Sandro Papais, a Ph.D. Candidate at the [University of Toronto Robotics and Artificial Intelligence Laboratory (UTIAS)](https://www.trailab.utias.utoronto.ca/), supervised by [Prof. Steven Waslander](https://www.trailab.utias.utoronto.ca/steven-waslander/). I’m also an Affiliate Researcher at the [Vector Institute](https://vectorinstitute.ai/) and a Machine Learning Perception Researcher at [Zoox](https://zoox.com/), where I work on advancing perception systems for autonomous driving. I also contribute to the development of the [Self-Driving Cars Specialization](https://www.coursera.org/specializations/self-driving-cars) on Coursera that has reached over 120k learners worldwide.
 
 Before my Ph.D., I developed visual navigation and autonomy software for interplanetary spacecraft at [NASA JPL's Mobility and Robotics Group](https://www-robotics.jpl.nasa.gov/), lunar landers and eVTOLs at [NGC Aerospace](https://ngcaerospace.com/en/), and rovers at European Space Agency's Research and Technology Centre (ESTEC).
 
