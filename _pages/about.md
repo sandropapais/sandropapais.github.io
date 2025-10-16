@@ -14,22 +14,18 @@ news: false # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
-Ph.D. Candidate at University of Toronto [Robotics and Artificial Intelligence Laboratory](https://www.trailab.utias.utoronto.ca/).
+Hello! I’m Sandro Papais, a Ph.D. Candidate at the [University of Toronto Robotics and Artificial Intelligence Laboratory (UTIAS)](https://www.trailab.utias.utoronto.ca/), supervised by [Prof. Steven Waslander](https://www.trailab.utias.utoronto.ca/steven-waslander/). I’m also an Affiliate Researcher at the [Vector Institute](https://vectorinstitute.ai/) and a Machine Learning Perception Researcher at [Zoox](https://zoox.com/)**, where I work on advancing perception systems for autonomous driving.  
 
-Robotic perception researcher with 7 years of robotics R&D experience. My work focuses on robotic perception, leveraging 3D computer vision and machine learning to understand dynamic environments. My research aims to push the boundaries of how robots perceive, interpret, and interact with the world around them.
+Before my Ph.D., I developed visual navigation and autonomy software for interplanetary spacecraft at [NASA JPL, Mobility and Robotics Group](https://www-robotics.jpl.nasa.gov/), lunar landers and eVTOLs at [NGC Aerospace](https://ngcaerospace.com/en/), and rovers at European Space Agency, Research and Technology Centre (ESTEC).
 
-## Research Interests
+My research lies at the intersection of 3D computer vision, machine learning, robotic perception, and motion forecasting, with a focus on **spatiotemporal world models** and **end-to-end autonomous driving models** that enable robots to perceive and act safely in dynamic environments.
 
-- **3D Computer Vision**: Multi-object tracking, object detection, and scene understanding
-- **Sensor Fusion**: LiDAR, camera, and radar integration for autonomous systems  
-- **Machine Learning**: Deep learning applications for robotic perception
-- **Autonomous Vehicles**: Perception systems for self-driving cars
-- **Real-time Systems**: Efficient algorithms for dynamic environment understanding
+Recently, I’ve been developing **camera and lidar-based temporal perception systems** that improve temporal reasoning in autonomous vehicles, allowing them to maintain object awareness through occlusions and reason about motion and object permanence. I’m the first author of **ForeSight (ICCV 2025)**, a multi-view streaming transformer for joint 3D detection and forecasting, and **SWTrack (ICRA 2024)**, a multiple-hypothesis tracking framework for autonomous driving. These works aim to bridge the gap between static perception and dynamic reasoning in robotic systems.  
 
-## Current Research
+I’m always open to discussing research, collaborations, or new ideas — feel free to reach out!
 
-My current research focuses on developing robust perception systems that enable robots to navigate and understand complex, dynamic environments. I work on multi-modal sensor fusion techniques, combining data from cameras, LiDAR, and radar to create comprehensive environmental representations.
 
-## Background
 
-I hold extensive experience in robotics R&D, with particular expertise in computer vision algorithms, sensor fusion, and machine learning applications for autonomous systems. My work spans from fundamental research in perception algorithms to practical implementations in real-world robotic systems.
+
+
+
