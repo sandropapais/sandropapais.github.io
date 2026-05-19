@@ -15,7 +15,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-I'm **Sandro Papais**, a Ph.D. Candidate at [UTIAS](https://www.trailab.utias.utoronto.ca/) with [Prof. Steven Waslander](https://www.trailab.utias.utoronto.ca/steven-waslander/), an Affiliate Researcher at the [Vector Institute](https://vectorinstitute.ai/), and a Machine Learning Perception Researcher at [Zoox](https://zoox.com/). I build spatiotemporal transformer models that let robots perceive and act in real time.
+I'm **Sandro Papais**, a Ph.D. Candidate at the [Toronto Robotics and AI Lab](https://www.trailab.utias.utoronto.ca/) with [Prof. Steven Waslander](https://www.trailab.utias.utoronto.ca/steven-waslander/), an Affiliate Researcher at the [Vector Institute](https://vectorinstitute.ai/), and a Machine Learning Perception Researcher at [Zoox](https://zoox.com/). I build spatiotemporal transformer models that let robots perceive and act in real time.
 
 Earlier, I shipped autonomy software for interplanetary spacecraft at [NASA JPL](https://www-robotics.jpl.nasa.gov/), lunar landers and eVTOLs at [NGC Aerospace](https://ngcaerospace.com/en/) (some of which has now [flown to the Moon](https://www.asc-csa.gc.ca/eng/blog/2025/08/04/made-in-canada-tested-on-the-moon.asp)), and rovers at the [European Space Agency](https://www.esa.int/About_Us/ESTEC/ESTEC_European_Space_Research_and_Technology_Centre). I also co-developed the [Self-Driving Cars Specialization](https://www.coursera.org/specializations/self-driving-cars) on Coursera, now used by 120,000+ learners worldwide.
 
