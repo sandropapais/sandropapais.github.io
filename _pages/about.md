@@ -2,14 +2,13 @@
 layout: about
 title: about
 permalink: /
-subtitle: Ph.D. Candidate | Machine Learning for 3D Perception & Robotic Autonomy
+subtitle:
 
 profile:
   align: right
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
-  more_info: >
-    <a href="/assets/pdf/SandroPapais_CV.pdf" target="_blank">Download CV</a>
+  more_info:
 
 news: false # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
