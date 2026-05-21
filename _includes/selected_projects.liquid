@@ -10,13 +10,7 @@
         </div>
       {% endif %}
       <div class="{% if site.enable_publication_thumbnails %}col-sm-7{% else %}col-sm-10{% endif %}">
-        <div class="title">
-          {% if project.url %}
-            <a href="{{ project.url }}">{{ project.title }}</a>
-          {% else %}
-            {{ project.title }}
-          {% endif %}
-        </div>
+        <div class="title">{{ project.title }}</div>
         <div class="periodical">{{ project.description }}</div>
       </div>
     </div>
