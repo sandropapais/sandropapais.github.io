@@ -1,6 +1,6 @@
-<div class="publications">
+<div class="publications selected-projects">
   {% for project in site.data.selected_projects %}
-    <div class="row">
+    <div class="row align-items-center">
       {% if site.enable_publication_thumbnails %}
         <div class="col col-sm-3 abbr">
           {% if project.image %}
@@ -22,3 +22,14 @@
     </div>
   {% endfor %}
 </div>
+
+<style>
+  .selected-projects .row {
+    margin-bottom: 1rem;
+  }
+  /* Keep project thumbnails compact so the short title + sentence don't
+     get dwarfed by a full-height image. */
+  .selected-projects .preview {
+    max-width: 150px;
+  }
+</style>
