@@ -13,7 +13,7 @@ profile:
 news: false # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 selected_projects: true # includes the Selected Projects list (see _data/selected_projects.yml)
-social: true # includes social icons at the bottom of the page
+social: false # includes social icons at the bottom of the page
 ---
 
 I'm **Sandro Papais**, a Ph.D. Candidate at the [University of Toronto Robotics and AI Lab](https://www.trailab.utias.utoronto.ca/) with [Prof. Steven Waslander](https://www.trailab.utias.utoronto.ca/steven-waslander/), an Affiliate Researcher at the [Vector Institute](https://vectorinstitute.ai/), and a Machine Learning Perception Researcher at [Zoox](https://zoox.com/). I build spatiotemporal transformer models that let robots perceive and act in real time.
