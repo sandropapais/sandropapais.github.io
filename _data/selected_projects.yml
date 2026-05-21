@@ -1,0 +1,16 @@
+# Selected Projects shown on the homepage (mirrors Selected Publications layout).
+# Swap `image` with your own file in assets/img/project_preview/ when ready.
+- title: AutoDrive Challenge II
+  image: project_preview/autodrive.png
+  url: https://www.utoronto.ca/news/u-t-s-autoronto-team-wins-first-competition-autodrive-challenge-sequel
+  description: Took first place with U of T's aUToronto team, building the perception and tracking stack for a full-scale self-driving vehicle.
+
+- title: Lunar Lander Autonomy
+  image: project_preview/ngc-lander.png
+  url: https://www.asc-csa.gc.ca/eng/blog/2025/08/04/made-in-canada-tested-on-the-moon.asp
+  description: Developed guidance and navigation software for lunar landers at NGC Aerospace, some of which has now flown to the Moon.
+
+- title: Perception at Zoox
+  image: project_preview/zoox.png
+  url: https://zoox.com/
+  description: Research machine-learning perception models for real-time autonomous driving on Zoox's robotaxi fleet.
