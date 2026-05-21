@@ -5,7 +5,7 @@
         <div class="col col-sm-3 abbr">
           {% if project.image %}
             {% assign project_path = project.image | prepend: '/assets/img/' %}
-            <img class="preview z-depth-1 rounded img-fluid" src="{{ project_path | relative_url }}" alt="{{ project.title }}">
+            <img class="preview z-depth-1 rounded img-fluid" src="{{ project_path | relative_url }}" alt="{{ project.title }}" data-zoomable>
           {% endif %}
         </div>
       {% endif %}
@@ -21,9 +21,8 @@
   .selected-projects .row {
     margin-bottom: 1rem;
   }
-  /* Keep project thumbnails compact so the short title + sentence don't
-     get dwarfed by a full-height image. */
-  .selected-projects .preview {
-    max-width: 150px;
+  /* Match the bold title weight used by the publication entries. */
+  .selected-projects .title {
+    font-weight: bolder;
   }
 </style>
