@@ -1,0 +1,41 @@
+<div class="publications blog-posts">
+  {% assign featured_posts = site.posts | where: "featured", true %}
+  {% for post in featured_posts %}
+    <div class="row align-items-center">
+      {% if post.thumbnail %}
+        <div class="col col-sm-3 abbr">
+          <a href="{{ post.url | relative_url }}">
+            <img
+              class="preview z-depth-1 rounded img-fluid"
+              src="{{ post.thumbnail | relative_url }}"
+              alt="{{ post.title }}"
+            >
+          </a>
+        </div>
+      {% endif %}
+      <div class="{% if post.thumbnail %}col-sm-7{% else %}col-sm-10{% endif %}">
+        <div class="title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </div>
+        {% if post.description %}
+          <div class="periodical">{{ post.description }}</div>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .blog-posts .row {
+    margin-bottom: 1rem;
+  }
+  .blog-posts .title {
+    font-weight: bolder;
+  }
+  .blog-posts .title a {
+    color: inherit;
+  }
+  .blog-posts .title a:hover {
+    color: var(--global-theme-color);
+  }
+</style>
