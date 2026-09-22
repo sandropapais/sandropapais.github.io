@@ -13,34 +13,32 @@ authors:
 toc:
   - name: The program at a glance
   - name: "First, what's a world model?"
-  - name: Physical AI foundations
-    subsections:
-      - name: "01 · World-action models vs VLAs"
-      - name: "02 · Borrow experience from cheaper embodiments"
   - name: Policy
     subsections:
-      - name: "03 · Closed-loop policy learning"
-      - name: "04 · Self-play overfits"
+      - name: "01 · WAM vs VLA as policies"
+      - name: "02 · Closed-loop policy learning"
+      - name: "03 · Self-play overfits"
   - name: Perception
     subsections:
-      - name: "05 · Geometry-first perception backbones"
-      - name: "06 · Open-world perception"
-      - name: "07 · Occlusion and object permanence"
+      - name: "04 · Geometry-first perception backbones"
+      - name: "05 · Open-world perception"
+      - name: "06 · Occlusion and object permanence"
   - name: Simulation
     subsections:
-      - name: "08 · Manufacturing the long tail"
-      - name: "09 · Fidelity vs reactivity"
-      - name: "10 · Generative sim train/serve gap"
+      - name: "07 · Manufacturing the long tail"
+      - name: "08 · Fidelity vs reactivity"
+      - name: "09 · Generative sim train/serve gap"
   - name: Data engines
     subsections:
+      - name: "10 · Borrow experience from cheaper embodiments"
       - name: "11 · Data engines for the long tail"
   - name: "What I'm watching next"
 ---
 {% include figure.liquid path="assets/img/blog/eccv2026/hero.jpg" class="img-fluid rounded z-depth-1" zoomable=true alt="Illustration of a world model: streams of real camera frames, LiDAR points and an action arrow flow into a glowing translucent lattice cube, inside which a city intersection with a vehicle is being generated; strips of possible future video frames fan out on the other side." caption="At ECCV 2026 world models were the protagonist — as a simulator, evaluator, and candidate policy for embodied AI." %}
 
-Computer vision is turning its focus to physical AI. At ECCV 2026 all three keynotes were about models that act in the physical world rather than just look at it, and the idea underneath almost everything was the world model: a model that predicts what happens next, and increasingly what to do about it. At least six workshops were built around world models, and the same backbones kept showing up in robot manipulation, egocentric video, and autonomous driving.
+Computer vision is turning its focus to physical AI. At ECCV 2026 all three keynotes were about models that act in the physical world rather than just look at it — Grauman on 4D egocentric understanding, LeCun on action-conditioned world models for planning, Shotton on learning over engineering in a decade of driving — and the idea underneath almost everything was the world model: a model that predicts what happens next, and increasingly what to do about it. At least six workshops were built around world models, and the same backbones kept showing up in robot manipulation, egocentric video, and autonomous driving.
 
-My own lens is driving, which Jamie Shotton called the first proving ground for embodied AI, but most of what follows transfers to robotics. Here are eleven takeaways, grouped into five areas.
+My own lens is driving, which Jamie Shotton called the first proving ground for embodied AI, but most of what follows transfers to robotics. Here are eleven takeaways, grouped into four areas.
 
 <h2 id="the-program-at-a-glance">The program at a glance</h2>
 
@@ -62,27 +60,19 @@ The term covers three different things, and the conversation gets muddled when t
 
 Most of the pixel-generating models in all three buckets share a latent diffusion/flow transformer backbone, and unified foundation models like [Cosmos 3](https://developer.nvidia.com/blog/develop-physical-ai-reasoning-world-and-action-models-with-nvidia-cosmos-3/) now support all three modes. One real architectural split is generative versus joint-embedding (JEPA-style) models, which predict latent states instead of pixels.
 
-<h2 id="physical-ai-foundations">Physical AI foundations</h2>
-
-The keynotes pointed the same way: Grauman on 4D egocentric understanding, LeCun on action-conditioned world models for planning, Shotton on learning over engineering in a decade of driving. Three starting points, one destination — models that act.
-
-<h3 id="01-world-action-models-vs-vlas">01 · World-action models (WAM) vs vision-language-action models (VLA)</h3>
-
-The central architecture debate in both robotics and driving. When used as a robot policy the evidence leans toward world-action models or hybrids, but it's thin and fair comparisons are difficult. In robotics, [a robustness study](https://arxiv.org/abs/2603.22078) finds WAMs ahead on RoboTwin-Plus (74.2% vs 58.6% for π0.5) but behind on LIBERO-Plus (82.2% vs 85.7%), and [NVIDIA reports](https://developer.nvidia.com/blog/pretrained-to-imagine-fine-tuned-to-act-the-rise-of-world-action-models/) DreamZero leading RoboArena. In driving, one head-to-head is in [OmniDreams](https://arxiv.org/abs/2606.03159): a WAM beat VLA-based Alpamayo 1.5 at ~1/5 the compute. Hybrids blur the lines — ECCV's [StructVLA](https://eccv.ecva.net/virtual/2026/poster/3187) predicts sparse, structured futures instead of dense video.
-
-[PRISM](https://arxiv.org/abs/2608.01201) finds VLM supervision helps driving through the latents it shapes, not through reasoning, and [Scaling Verification](https://eccv.ecva.net/virtual/2026/poster/5640) (Finn, Pavone) shows a test-time verifier beating the same data spent on more VLA pre-training. My read: VLAs are more mature, WAMs are earlier research, and structure around the policy — verifiers, scorers, predicted futures — is paying off faster than scaling the policy itself.
-
-*More to read:* [Sim-to-real in dexterous VLAs](https://eccv.ecva.net/virtual/2026/poster/5392)
-
-<h3 id="02-borrow-experience-from-cheaper-embodiments">02 · Borrow experience from cheaper embodiments</h3>
-
-Robot and vehicle data is expensive; video of people and dashcams is not. The trick that kept recurring is a structural bridge between the two. Grauman's EgoExo-WM trains egocentric world models from third-person video using body pose as the bridge. [DexWM](https://eccv.ecva.net/virtual/2026/poster/5625) learns dexterous hand–object world models from human video and transfers zero-shot to a robot hand, beating Diffusion Policy by over 50%. In driving, Waymo's [Sensor2Sensor](https://arxiv.org/html/2605.22809) turns dashcam video into multi-camera + LiDAR logs for a target vehicle, and [roadside sensors can act as teachers](https://eccv.ecva.net/virtual/2026/poster/4075). Yunzhu Li made the general case: structured world models as scalable data engines for robotics.
-
-*More to read:* [One Demonstration Is Enough for Real-World Robotic RL](https://eccv.ecva.net/virtual/2026/poster/5855)
+The other fight that showed up everywhere is world-action models (WAM) versus vision-language-action models (VLA): the same action interface as in the figure, but a video or world-model backbone instead of a VLM. Hybrids are a live third option — [StructVLA](https://eccv.ecva.net/virtual/2026/poster/3187) predicts sparse, structured futures instead of dense video. Those stacks power rollouts, simulation, and planning as much as they do the policy head; when the model *is* the policy, the evidence lives in the Policy section below.
 
 <h2 id="policy">Policy</h2>
 
-<h3 id="03-closed-loop-policy-learning">03 · Closed-loop policy learning</h3>
+<h3 id="01-wam-vs-vla-as-policies">01 · WAM vs VLA as policies</h3>
+
+The central backbone debate lands on benchmarks when you deploy the model as the controller. Fair comparisons are still rare. In robotics, [a robustness study](https://arxiv.org/abs/2603.22078) finds WAMs ahead on RoboTwin-Plus (74.2% vs 58.6% for π0.5) but behind on LIBERO-Plus (82.2% vs 85.7%), and [NVIDIA reports](https://developer.nvidia.com/blog/pretrained-to-imagine-fine-tuned-to-act-the-rise-of-world-action-models/) DreamZero leading RoboArena. In driving, [OmniDreams](https://arxiv.org/abs/2606.03159) has a WAM beating VLA-based Alpamayo 1.5 at ~1/5 the compute.
+
+[PRISM](https://arxiv.org/abs/2608.01201) finds VLM supervision helps driving through the latents it shapes, not through reasoning, and [Scaling Verification](https://eccv.ecva.net/virtual/2026/poster/5640) (Finn, Pavone) shows a test-time verifier beating the same data spent on more VLA pre-training. My read: VLAs are more mature, WAMs are earlier research, and structure around the policy — verifiers, scorers, predicted futures — is paying off faster than scaling the policy itself. Backbone choice matters; the louder ECCV message was how you train and evaluate once you pick one.
+
+*More to read:* [Sim-to-real in dexterous VLAs](https://eccv.ecva.net/virtual/2026/poster/5392)
+
+<h3 id="02-closed-loop-policy-learning">02 · Closed-loop policy learning</h3>
 
 Wayve, NVIDIA, Waymo, Zenseact and KE:SAI all gave the same diagnosis: behavior cloning learns *predictions*, not *behaviors*. Bernhard Jaeger's talk laid out the two recipes that work: RL post-training on top of an imitation policy (what ships today), and a privileged RL teacher distilled on-policy into a sensor-based student (the research frontier). The same split is playing out in robot learning. NVIDIA's [survey of closed-loop training](https://research.nvidia.com/labs/avg/publication/karkus.igl.etal.pami2025/) is the best overview.
 
@@ -92,7 +82,7 @@ Wayve, NVIDIA, Waymo, Zenseact and KE:SAI all gave the same diagnosis: behavior 
 
 *More to read:* [BeyondDrive](https://eccv.ecva.net/virtual/2026/poster/3394) · [CaRL](https://arxiv.org/abs/2504.17838v3) · [UniDrive-WM](https://arxiv.org/abs/2601.04453) · [WTA→GMM forecasting](https://eccv.ecva.net/virtual/2026/poster/4060) · [SparseDriveV2](https://eccv.ecva.net/virtual/2026/poster/3597)
 
-<h3 id="04-self-play-overfits">04 · Self-play overfits</h3>
+<h3 id="03-self-play-overfits">03 · Self-play overfits</h3>
 
 Self-play scales beautifully — [TerraZero](https://arxiv.org/abs/2607.13028) runs 1.3M agent-steps/s and leads the InterPlan long-tail benchmark with no human demonstrations — but [BehaviorBench](https://arxiv.org/abs/2605.10034) shows pure self-play policies overfit to their own traffic and crash more against other agent models. Evaluate against a panel of behaviors, not one.
 
@@ -100,7 +90,7 @@ Self-play scales beautifully — [TerraZero](https://arxiv.org/abs/2607.13028) r
 
 <h2 id="perception">Perception</h2>
 
-<h3 id="05-geometry-first-perception-backbones">05 · Geometry-first perception backbones</h3>
+<h3 id="04-geometry-first-perception-backbones">04 · Geometry-first perception backbones</h3>
 
 Two kinds of pretrained model are becoming perception backbones, both betting on geometry over raw semantics.
 
@@ -114,13 +104,13 @@ Both routes win on data efficiency and generalization more than on peak leaderbo
 
 *More to read:* [PhysMani](https://eccv.ecva.net/virtual/2026/poster/4493) · [What if? (world models for spatial reasoning)](https://eccv.ecva.net/virtual/2026/poster/4721) · [Flow4R](https://eccv.ecva.net/virtual/2026/poster/5342) · [Thermo-JEPA](https://eccv.ecva.net/virtual/2026/poster/3162)
 
-<h3 id="06-open-world-perception">06 · Open-world perception</h3>
+<h3 id="05-open-world-perception">05 · Open-world perception</h3>
 
 Generalizing to what wasn't in the training set is the other big frontier. [Fail2Drive](https://arxiv.org/abs/2604.08535) pairs every test route with an unseen twin — new objects, layouts and behaviors — and SOTA driving policies lose 22.8% success on average, sometimes ignoring objects clearly visible in the LiDAR. The fixes on show lean on foundation models: [BEVOpen3D](https://eccv.ecva.net/virtual/2026/poster/3368) distills a 2D vision-language model into an open-world LiDAR detector, [open-vocabulary BEV segmentation](https://eccv.ecva.net/virtual/2026/poster/3266) adds 3D geometric constraints, and [NegAS](https://eccv.ecva.net/virtual/2026/poster/3940) cuts out-of-distribution false positives by 25% on OpenImages. TokenGraph3D shows a frozen self-supervised point encoder already separates object instances without any class labels.
 
 *More to read:* [real-time OOD detection](https://eccv.ecva.net/virtual/2026/poster/4106) · [Is Single-View Mesh Reconstruction Ready for Robotics?](https://arxiv.org/abs/2505.17966)
 
-<h3 id="07-occlusion-and-object-permanence">07 · Occlusion and object permanence</h3>
+<h3 id="06-occlusion-and-object-permanence">06 · Occlusion and object permanence</h3>
 
 An agent has to keep track of what it can't currently see. [StEvo-Bench](https://eccv.ecva.net/virtual/2026/poster/4982) tests whether video world models evolve the state of the world independently of what's in view — insert an occluder or move the camera — and finds most of them let hidden objects disappear, a problem for any agent that plans with one. [BeyondSight](https://arxiv.org/abs/2607.09138) tackles the same principle in end-to-end driving: persistent actor hypotheses that survive occlusion, with nuScenes-Permanence for training and evaluation. Two other driving papers attack occlusion head-on: a worst-case search over hidden agents that stays consistent with what was seen before, and [localizing out-of-sight pedestrians through radar and camera reflections](https://eccv.ecva.net/virtual/2026/poster/4784).
 
@@ -130,7 +120,7 @@ An agent has to keep track of what it can't currently see. [StEvo-Bench](https:/
 
 <h2 id="simulation">Simulation</h2>
 
-<h3 id="08-manufacturing-the-long-tail">08 · Manufacturing the long tail</h3>
+<h3 id="07-manufacturing-the-long-tail">07 · Manufacturing the long tail</h3>
 
 Real logs contain almost none of the scenarios that matter, so they have to be manufactured. [World Engine](https://opendrivelab.com/WorldEngine/) finds real failures, rebuilds them in 3DGS, generates harder variants and RL-post-trains on them: **45.5% fewer collisions**, ~200 km on-road with zero disengagements. Adversarial generators are getting sharper too ([CompoSIA](https://eccv.ecva.net/virtual/2026/poster/3714) raises planner collisions 173%).
 
@@ -138,7 +128,7 @@ Real logs contain almost none of the scenarios that matter, so they have to be m
 
 *More to read:* [ReinDriveGen](https://eccv.ecva.net/virtual/2026/poster/3685)
 
-<h3 id="09-fidelity-vs-reactivity">09 · Fidelity vs reactivity</h3>
+<h3 id="08-fidelity-vs-reactivity">08 · Fidelity vs reactivity</h3>
 
 Simulators moved from physics engines (CARLA and robotics equivalents) to neural reconstruction (3DGS twins like [HUGSIM](https://arxiv.org/abs/2412.01718)) to generative models that reach beyond collected data. Today world models are used mostly for policy evaluation, data generation, and RL teachers — not yet as on-robot MPC policies.
 
@@ -148,7 +138,7 @@ No simulator has both fidelity and reactivity yet. Log replay and 3DGS twins are
 
 *More to read:* [SPEAR simulator](https://eccv.ecva.net/virtual/2026/poster/3273) · [Waymo World Model](https://waymo.com/blog/2026/02/the-waymo-world-model-a-new-frontier-for-autonomous-driving-simulation/) · [LiSTAR](https://eccv.ecva.net/virtual/2026/poster/5672) · [Cosmos-Transfer1](https://arxiv.org/abs/2503.14492)
 
-<h3 id="10-generative-sim-train-serve-gap">10 · Generative sim train/serve gap</h3>
+<h3 id="09-generative-sim-train-serve-gap">09 · Generative sim train/serve gap</h3>
 
 Generative simulators are trained on expert actions and clean context, then driven by a learner's actions and their own outputs. Expert-only models (GenAD, Vista) break on non-expert actions; [ReSim](https://arxiv.org/abs/2506.09981) fixes that by mixing in simulated bad driving. Rollouts drift unless trained on imperfect histories (CausalDrive, DAgger, diffusion forcing). The same gap applies to robot world models trained on demonstrations: real data for grounding, sim data for coverage.
 
@@ -157,6 +147,12 @@ Generative simulators are trained on expert actions and clean context, then driv
 *More to read:* [OmniDreams](https://arxiv.org/abs/2606.03159) · [VATIX scaling laws](https://github.com/valeoai/VATIX)
 
 <h2 id="data-engines">Data engines</h2>
+
+<h3 id="10-borrow-experience-from-cheaper-embodiments">10 · Borrow experience from cheaper embodiments</h3>
+
+Robot and vehicle data is expensive; video of people and dashcams is not. The trick that kept recurring is a structural bridge between the two. Grauman's EgoExo-WM trains egocentric world models from third-person video using body pose as the bridge. [DexWM](https://eccv.ecva.net/virtual/2026/poster/5625) learns dexterous hand–object world models from human video and transfers zero-shot to a robot hand, beating Diffusion Policy by over 50%. In driving, Waymo's [Sensor2Sensor](https://arxiv.org/html/2605.22809) turns dashcam video into multi-camera + LiDAR logs for a target vehicle, and [roadside sensors can act as teachers](https://eccv.ecva.net/virtual/2026/poster/4075). Yunzhu Li made the general case: structured world models as scalable data engines for robotics.
+
+*More to read:* [One Demonstration Is Enough for Real-World Robotic RL](https://eccv.ecva.net/virtual/2026/poster/5855)
 
 <h3 id="11-data-engines-for-the-long-tail">11 · Data engines for the long tail</h3>
 
