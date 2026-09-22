@@ -23,9 +23,9 @@ toc:
       - name: "04 · Self-play overfits"
   - name: Perception
     subsections:
-      - name: "05 · Occlusion and object permanence"
-      - name: "06 · Geometry-first perception backbones"
-      - name: "07 · Open-world perception"
+      - name: "05 · Geometry-first perception backbones"
+      - name: "06 · Open-world perception"
+      - name: "07 · Occlusion and object permanence"
   - name: Simulation
     subsections:
       - name: "08 · Manufacturing the long tail"
@@ -100,15 +100,7 @@ Self-play scales beautifully — [TerraZero](https://arxiv.org/abs/2607.13028) r
 
 <h2 id="perception">Perception</h2>
 
-<h3 id="05-occlusion-and-object-permanence">05 · Occlusion and object permanence</h3>
-
-An agent has to keep track of what it can't currently see. [StEvo-Bench](https://eccv.ecva.net/virtual/2026/poster/4982) tests whether video world models evolve the state of the world independently of what's in view — insert an occluder or move the camera — and finds most of them let hidden objects disappear, a problem for any agent that plans with one. [BeyondSight](https://arxiv.org/abs/2607.09138) tackles the same principle in end-to-end driving: persistent actor hypotheses that survive occlusion, with nuScenes-Permanence for training and evaluation. Two other driving papers attack occlusion head-on: a worst-case search over hidden agents that stays consistent with what was seen before, and [localizing out-of-sight pedestrians through radar and camera reflections](https://eccv.ecva.net/virtual/2026/poster/4784).
-
-{% include figure.liquid path="assets/img/blog/eccv2026/fig04.png" class="img-fluid rounded z-depth-1" zoomable=true alt="Object permanence: a car hidden behind a truck still exists. Many video world models drop it once it's out of view." caption="Object permanence: a car hidden behind a truck still exists. Many video world models drop it once it's out of view." %}
-
-*More to read:* [RePL](https://eccv.ecva.net/virtual/2026/poster/3561)
-
-<h3 id="06-geometry-first-perception-backbones">06 · Geometry-first perception backbones</h3>
+<h3 id="05-geometry-first-perception-backbones">05 · Geometry-first perception backbones</h3>
 
 Two kinds of pretrained model are becoming perception backbones, both betting on geometry over raw semantics.
 
@@ -122,11 +114,19 @@ Both routes win on data efficiency and generalization more than on peak leaderbo
 
 *More to read:* [PhysMani](https://eccv.ecva.net/virtual/2026/poster/4493) · [What if? (world models for spatial reasoning)](https://eccv.ecva.net/virtual/2026/poster/4721) · [Flow4R](https://eccv.ecva.net/virtual/2026/poster/5342) · [Thermo-JEPA](https://eccv.ecva.net/virtual/2026/poster/3162)
 
-<h3 id="07-open-world-perception">07 · Open-world perception</h3>
+<h3 id="06-open-world-perception">06 · Open-world perception</h3>
 
-The other perception frontier is generalizing to what wasn't in the training set. [Fail2Drive](https://arxiv.org/abs/2604.08535) pairs every test route with an unseen twin — new objects, layouts and behaviors — and SOTA driving policies lose 22.8% success on average, sometimes ignoring objects clearly visible in the LiDAR. The fixes on show lean on foundation models: [BEVOpen3D](https://eccv.ecva.net/virtual/2026/poster/3368) distills a 2D vision-language model into an open-world LiDAR detector, [open-vocabulary BEV segmentation](https://eccv.ecva.net/virtual/2026/poster/3266) adds 3D geometric constraints, and [NegAS](https://eccv.ecva.net/virtual/2026/poster/3940) cuts out-of-distribution false positives by 25% on OpenImages. TokenGraph3D shows a frozen self-supervised point encoder already separates object instances without any class labels.
+Generalizing to what wasn't in the training set is the other big frontier. [Fail2Drive](https://arxiv.org/abs/2604.08535) pairs every test route with an unseen twin — new objects, layouts and behaviors — and SOTA driving policies lose 22.8% success on average, sometimes ignoring objects clearly visible in the LiDAR. The fixes on show lean on foundation models: [BEVOpen3D](https://eccv.ecva.net/virtual/2026/poster/3368) distills a 2D vision-language model into an open-world LiDAR detector, [open-vocabulary BEV segmentation](https://eccv.ecva.net/virtual/2026/poster/3266) adds 3D geometric constraints, and [NegAS](https://eccv.ecva.net/virtual/2026/poster/3940) cuts out-of-distribution false positives by 25% on OpenImages. TokenGraph3D shows a frozen self-supervised point encoder already separates object instances without any class labels.
 
 *More to read:* [real-time OOD detection](https://eccv.ecva.net/virtual/2026/poster/4106) · [Is Single-View Mesh Reconstruction Ready for Robotics?](https://arxiv.org/abs/2505.17966)
+
+<h3 id="07-occlusion-and-object-permanence">07 · Occlusion and object permanence</h3>
+
+An agent has to keep track of what it can't currently see. [StEvo-Bench](https://eccv.ecva.net/virtual/2026/poster/4982) tests whether video world models evolve the state of the world independently of what's in view — insert an occluder or move the camera — and finds most of them let hidden objects disappear, a problem for any agent that plans with one. [BeyondSight](https://arxiv.org/abs/2607.09138) tackles the same principle in end-to-end driving: persistent actor hypotheses that survive occlusion, with nuScenes-Permanence for training and evaluation. Two other driving papers attack occlusion head-on: a worst-case search over hidden agents that stays consistent with what was seen before, and [localizing out-of-sight pedestrians through radar and camera reflections](https://eccv.ecva.net/virtual/2026/poster/4784).
+
+{% include figure.liquid path="assets/img/blog/eccv2026/fig04.png" class="img-fluid rounded z-depth-1" zoomable=true alt="Object permanence: a car hidden behind a truck still exists. Many video world models drop it once it's out of view." caption="Object permanence: a car hidden behind a truck still exists. Many video world models drop it once it's out of view." %}
+
+*More to read:* [RePL](https://eccv.ecva.net/virtual/2026/poster/3561)
 
 <h2 id="simulation">Simulation</h2>
 
@@ -168,7 +168,7 @@ Dragomir Anguelov's line stuck with me: *"yesterday's long tail is today's torso
 
 Every stage now has an automated tool — enumerate (TTCov), mine (Semantic-Drive), generate (CompoSIA, ReinDriveGen), auto-label (TokenGraph3D, RePL), train (World Engine) and validate (Fail2Drive, AlpaSim). What's missing is the map that connects them: a shared taxonomy of the long tail to enumerate against — in driving and, even more so, in open-world robotics.
 
-*More to read:* [123D](https://arxiv.org/abs/2605.08084) · [the common task framework argument](https://kesai.eu/blog/2026-09-08-common-task-framework/) · OpenDV-2K · KITTI-360 · [CooperScene](https://eccv.ecva.net/virtual/2026/poster/4574)
+*More to read:* [123D](https://arxiv.org/abs/2605.08084) · [the common task framework argument](https://kesai.eu/blog/2026-09-08-common-task-framework/) · [CooperScene](https://eccv.ecva.net/virtual/2026/poster/4574)
 
 <h2 id="what-i-m-watching-next">What I'm watching next</h2>
 
